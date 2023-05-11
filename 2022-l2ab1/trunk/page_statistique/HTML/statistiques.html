@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/body.css">   
+    <link rel="stylesheet" href="../CSS/section.css">
+    <link rel="stylesheet" href="../CSS/table.css">
+    <link rel="stylesheet" href="../CSS/select.css">
+    <link rel="stylesheet" href="../CSS/button-section.css">
+    
+    <link rel="stylesheet" href="../CSS/spine.css">
+    <link rel="stylesheet" href="../../page_carte/CSS/filtres.css">
+     <link rel="stylesheet" href="../../page_carte/CSS/style.css">
+     <link rel="stylesheet" href="../../Commun/CSS/commun.css">
+ 
+
+
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:400,700&display=swap" rel="stylesheet"> <!-- header style -->
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js" integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+
+    <link rel="icon" href="../../Commun/images/A.svg">
+    <title>Statistiques</title>
+</head>
+<body onload="createFirstTbody() ;DrawTable()" class="header">
+    <header id="header_absolute">
+
+        <div class="container">
+
+            <div>
+                
+                <div>
+
+                    <ul class="pages">
+                        <li><a href="../../page_accueil/HTML/essaie.html"><img src="../../Commun/images/logo.jpg" alt="Logo de Accidentologie"></a></li>
+                        <li><a href="../../page_carte/HTML/page_carte.html"> Carte</a></li>
+                        <li><a href="statistiques.html">  Statistiques</a></li>
+                    </ul>
+                </div>
+
+        </div>
+
+    </header>
+
+<!-- SECOND HEADER-->
+     <header id="header_fixed">
+
+        <div class="container">
+
+            <div>
+
+                <div>
+
+                    <div>
+                        <ul class="pages">
+                            <li><a href="../../page_accueil/HTML/essaie.html"><img src="../../Commun/images/logo.jpg" alt="Logo de Accidentologie"></a></li>
+                            <li><a href="../../page_carte/HTML/page_carte.html">Carte</a></li>
+                            <li><a href="statistiques.html">Statistiques</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <main>
+        
+        <section class="section-graph">
+            <div class="graph-table-container" >
+                    <div class="graph-filtres-container" id="graph-filtres-container">
+                
+                                <div class="filtres-container">
+                                    <div class="axe-x-container">
+                                        <label for="axe-x">Axe X</label>
+                                        <select id="axe-x" onchange="afficherFiltres(); getValueX()" name="axe-x">
+                                            <option value="datetime">Année</option>
+                                            <option value="reg_name">Région</option>
+                                            <option value="dep_name">Département</option>
+                                            <option value="atm">Condition Métérologique</option>
+                                            <option value="sexe">Sexe</option>
+                                            <option value="an_nais">Tranche d'Âge</option>
+                                            <option value="grav">Gravité</option>
+                                            <option value="lum">Jour/Nuit</option>
+                                        </select>
+                                    </div>
+                                    <div class="colonne-container">
+                                        <label for="colonne">Type de Graphe</label>
+                                        <select id="graph-select" onchange="getValueColonne()" name="colonne">
+                                            <option value="courbe">Courbe</option>
+                                            <option value="colonne">Colonne</option>
+                                            <option value="camembert">Camembert</option>
+                                        </select>
+                                    </div> 
+                                    <div class="filtre-lieu-container" >
+                                        <label for="lieu">Lieu</label>
+                                        <select onchange="getLieu()" name="lieu" id="lieu-select">
+                                            <option value="tous-les-lieux">Tous les Lieux</option>  
+                                        </select>
+                                    </div>
+                                    <div class="filtre-annee-container" style="display:none"> <!-- filter "année" hidden because we display the number of accidents for each year by default-->
+                                                                                            
+                                        <label for="annee">Année</label>
+                                        <select  name="annee" onchange="getAnnee()" id="annee-graph-select">
+                                            <option value="toutes-les-annees">Toutes les Années</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2014">2014</option>
+                                            <option value="2013">2013</option>
+                                            <option value="2012">2012</option>
+                                        </select>
+                                    </div>
+                                    
+                                </div>                        
+                        <div class="graph-container" id="graph-container">
+                            <canvas id="canvas">
+                                <!-- the graph -->
+                            </canvas>
+                            <svg id="spinner-graph"  width="80px" height="80px" viewBox="0 0 66 66" >
+                                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                            </svg>
+                            <p id="erreurs-graph">Message d'Erreur</p>
+                        </div>
+                    </div>
+                    <div class="table-annee-container" id="table">
+                        <div class="table-container" id="table-container">
+
+                            <table id="table-region-data">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Classement
+                                        </th>
+                                        <th>
+                                            Région
+                                        </th>
+                                        <th>
+                                            Nombre d'Accidents
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                            </table>
+                            <tbody>
+                                
+                            </tbody>
+                            <p id="erreurs-table" >Message d'Erreur</p>
+                          
+
+                        </div>
+                        <div  class="annee-container" >
+                            <select  class="filtre-annee" name="annee" id="annee-table-select" onchange=" getAnneeTable()" >
+                                <option value="toutes-les-annees">Toutes les Années</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>    
+                            </select>
+                        </div>
+                    </div>
+                
+                
+               
+                   
+
+                </div>
+            </div>
+            <div class="telecharger-container">
+                
+                <button onclick="download()" id="downloading1">Télécharger
+                    <img style="vertical-align:middle"   id="image-telecharger" src="../images/téléchargerwhite.svg" alt="télécharger" title="télécharger">
+                    <a href="#" class="info"><span>Télécharger le Graphe</span></a>
+                    
+                </button>
+                
+                
+                    
+            </div>
+            
+                
+        </section>
+    </main>
+
+    <!--Footer-->
+    <footer id="footer">
+
+        <div class="container">
+    
+            <div>
+    
+                <div>
+    
+                    <div class="footer-set_up">
+                        <ul class="pages">
+                            <li><a href="../../page_crédit/HTML/page_credit.html">Crédits</a></li>
+                            <li><a href="../../page_A_propos_de_nous/HTML/page_a-propos-de-nous.html">À Propos de Nous</a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    </footer>
+
+    <a id="back2Top" title="Back to top"  onclick="topFunction()"> <img src="https://uploads-ssl.webflow.com/620a7ac0833f49433b0bee1f/620c30eb8af8774df7fbe800_BACK%20TO%20TOP.png" alt="nav-img"> </a>
+</body>
+</html>
+<script src="../Javascript/style.js"></script>
+<script src="../Javascript/graph-config.js"></script>
+<script src="../Javascript/graph-table-load.js"></script>
+<script src="../Javascript/age-lum.js"></script>
+<script src="../Javascript/graph-data.js"></script>
+<script src="../Javascript/graph-filtres.js"></script>
+<script src="../Javascript/init-filtre.js"></script>
+
+<script src="../Javascript/graph-download.js"></script>
+<script src="../Javascript/tableau.js"></script>
+<script src="../../Commun/JavaScript/scroll.js"></script>
+<script src="../../page_carte/JavaScript/style.js"></script>
+

@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* utiliser le font de google Roboto*/
+
+
+/*definir des constantes couleur font...*/
+:root{
+    --header-bg:#14227b; /*variable du header*/
+    --header-title-hover:#0677da;
+    --header-text-size:15px;
+    --header-text-weight:700;
+    --header-text-title-weight:800;
+    --header-text-color:yellow;
+
+    --section-bg:#f5f5f5; /*variables de la section*/
+    --section-border:#DEE5EF;
+    --section-filtre-bg:#a1b0b8;
+
+    --graph-text-bg-hover:#b4dbd6;
+    --graph-border-color:rgba(0,0,0,.15);
+
+    --table-hover-bg:#cacbce;
+
+    --telecharger-bg-hover:#c4302b;
+
+    --shadow-color:rgba(000,000,000,0.3);
+
+    --filtre-carte-color:#565656; /*variable du filtre*/
+    --filtre-carte-bg:#e5e5e5;
+    --filtre-border-color:#ccc;
+    --blue-filtre-bg:#6e93f7;
+
+    --blue-border-effect:#0a6bff;
+
+    --reset-bg-hover:#065dd8;
+
+    
+    
+    --filtre-carte-weight:700;
+    --filtre-carte-size:15px;
+
+    --footer-bg:#051039;
+    --footer-title-font:25px;
+    --footer-title-weight:600;
+    --footer-text-weight:500;
+    --footer-text-font:15px;
+    --link-color:#ff9800;
+
+    
+}
+
+html{  
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    margin:0;
+    height: 100%;
+}
+
+
+
+
+   
+    
+
+

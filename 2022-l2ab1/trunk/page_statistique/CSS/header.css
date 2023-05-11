@@ -1,0 +1,83 @@
+/*les elements du header*/
+
+
+header{               
+    position:fixed;  
+    width:100%;
+    box-shadow: 10px 10px 10px rgba(000,000,000,0.3);
+    top:0;  /* le header sera fixer en haut de la p*/
+    z-index:10; 
+    background-color: var(--header-bg);
+    height:8%;  /* il prend 10% de la hauteur de la page*/
+    font-weight: var(--header-text-weight);
+    font-size: var(--text-title-font);
+    
+    
+    
+    
+}
+
+#statistiques{
+    background-color: var(--header-title-hover) ;
+    color:white;
+}
+
+
+
+
+ul{
+    display: flex;
+    height:100%;  
+    margin:0;
+    list-style-type:none;
+    
+
+}
+
+/* centrer le contenu des div qui contiennent les titres  */
+
+ul a{
+    display:flex;
+    align-items: center; /*aligner le text verticalement */
+    width: 20%; 
+    height: 100%; 
+    transition:all 0.3s ease;
+    text-decoration: none;
+    justify-content: center;
+    color:var(--header-text-color);
+    
+    
+
+}
+
+
+
+
+
+/* le titre "Accidentologie " aura un style different des autres titres */
+.anc-title{
+    font-weight: var(--header-text-);
+    width:40%;  /*titre prend 40% de la largeur du header*/
+    color:white;
+    justify-content: start;
+    font-size: 2rem;
+}
+
+/* ajouter un style si on survole les titre "accueil" ,"carte */
+.anc-sous-titre:hover,.open-nav:hover{
+    background-color:var(--header-title-hover);
+    cursor:pointer;
+    color:white;
+   
+    transition: 0.3s all ease;
+    
+
+    
+    
+}
+
+
+a{
+    text-decoration: none;
+}
+

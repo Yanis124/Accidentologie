@@ -1,0 +1,170 @@
+ul{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit; /* set the color of the visited link to the color of its parent */
+    text-decoration: none; /* remove any text decoration on the visited link */
+  }
+
+body {
+    margin: 0
+}
+
+body {
+    font-family: 'Catamaran', sans-serif; /*REVOIR LA POLICE*/
+}
+
+.container{
+    width: 100%;
+}
+
+.container img{
+    padding-top:10px;
+}
+
+
+/* HEADER */
+
+header {
+    width: 100%; /*Le header prend toute la place de la page*/
+    display: flex;
+    font-size: 18px;
+    align-items: center;
+    z-index: 800;
+    background-color: #fff;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+header .pages a {
+    color: black;
+    display: block;
+}
+
+header .pages a:hover {
+    transform: scale(1.02);
+}
+
+header .pages {
+    display: flex; /*mettre les pages carte et statistiques l'une a coté de l'autre*/
+    align-items: center;
+    list-style: none;
+}
+
+
+header .pages li:first-child{
+    margin-right: auto;
+}
+
+header .pages a img{
+    width: 75px;
+    padding-left: 25px;
+}
+
+header .pages li:nth-child(2) {
+    margin-right: 35px; /* espace entre CRÉDITS et STATISTIQUES*/
+}
+
+
+#header_absolute {
+    position:absolute; /*Mettre les pages CRÉDITS et STATISTIQUES sur la photo d'accueil*/
+}
+
+#header_absolute .container {
+    padding-right: 70px;/*Marge a droite des pages CRÉDITS et STATISTIQUES*/
+}
+
+
+
+#header_fixed {
+    position:fixed;/*Afficher le deuxième menu quand on deroule*/
+    background-color:white; /* white */
+    top: -100px; /*Pour pas afficher tout de suite le deuxième menu*/
+    transition: top 300ms ease; /*Permet l'affichage du deuxième menu de haut en bas moins violent*/
+}
+
+#header_fixed li:last-child{
+    padding-right: 25px;
+}
+
+#header_fixed.sticky_header {
+    top: 0px; /*Mettre en haut de la page le deuxième menu*/
+}
+
+
+
+
+.header { /*COULEUR D'ARRIÈRE PLAN*/
+    background-color: white;/*REVOIR LA COULEUR*/
+}
+
+.header #header_absolute a {
+    color: black; /*Couleur HEADER premier*/
+}
+
+/* FOOTER */
+
+footer {
+    background-color: white;
+    padding: 40px 0px;/*Taille du foooter*/
+}
+
+.footer-set_up .pages {
+    display: flex; /*Mettre CRÉDIT et A PROPOS DE NOUS à coté*/
+    justify-content: center;
+}
+
+.footer-set_up .pages li {
+    list-style: none; /*Enleve les pints de la liste*/
+    padding: 0px 20px; /*Eloignement de la barre de séparation*/
+    text-transform:uppercase;
+    font-size: 15px;
+    border-right: 1px solid #9ea8ba; /*Barre de séparation entre CRÉDIT et A PROPOS DE NOUS*/
+}
+
+.footer-set_up .pages li:last-child {
+    border-right: 0px; /*enleve le trait après A PROPOS DE NOUS*/
+}
+
+.footer-set_up .pages li a {
+    color: black; /*couleur du texte footer*/
+}
+
+
+@media screen and (max-width: 768px){
+    header{
+        justify-content: center;
+    }
+}
+
+
+@media screen and (min-width: 481px){
+    header{
+        height: 70px;
+    }
+}
+
+@media screen and ( max-width: 480px){
+
+    header{
+        height: 50px;
+        font-size: 15px;
+    }
+
+    header img{
+        height: 45px;
+        width:45px;
+    }
+}
+
+

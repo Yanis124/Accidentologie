@@ -1,0 +1,179 @@
+/* animation pour la section */
+
+
+
+
+
+.section-graph{
+    display:flex;
+    flex-direction: column;
+    justify-content:flex-start; 
+    background-color: #fff; 
+    padding-top:50px; 
+    
+}
+
+
+
+
+
+
+
+.graph-table-container{
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: space-around;
+    padding-top:3%;
+    padding-bottom: 20px;
+    height: 80%; /*le div du graph et du tableau prend 90% de la hauteur de section*/
+
+    
+    
+
+}
+
+
+
+
+.graph-filtres-container{
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s all ease;
+    -moz-box-shadow: 0 0 7px var(--shadow-color);
+    -webkit-box-shadow: 0 0 7px var(--shadow-color);
+    box-shadow: 0 0 7px var(--shadow-color);
+    border-radius: 6px;
+    gap:20px;
+    
+}
+
+
+
+.filtres-container{
+    display:grid;
+    grid-template-rows: 50% 50%; /*chaque filtre prend 50% de la longeur et 30% de la largeur  du filtres-container*/
+    grid-template-columns: 30% 30%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #e8e8e8;
+    height: 20%; /*le div prend 30% de la hauteur du graph-filtres-container*/
+    width:100%;
+    padding-bottom: 10px;
+
+}
+
+
+
+
+
+
+.graph-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--section-border);
+    height:80%; /*le graaph prend 70% de la longeur du graph-filtre-container*/
+    width: 100%;
+    
+}
+
+
+
+
+.table-annee-container{
+    height:95%; /*le tableau prend 90% de la hauteur du graph-table-container*/
+    width: 30%; /*le tableau prend 30% de la largeur du graph-table-container*/
+    transition: 0.3s all ease;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.table-container{
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #fff;
+    -moz-box-shadow: 0 0 7px var(--shadow-color);
+    -webkit-box-shadow: 0 0 7px var(--shadow-color);
+    box-shadow: 0 0 7px var(--shadow-color);
+    border-radius: 6px;
+}
+
+
+
+
+
+
+.annee-container{
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 10%; /*div prend 10% de la hauteur du table-annee-container*/
+    margin-right:5%;
+}
+
+.telecharger-container{
+    padding-top:20px;
+    padding-bottom:20px;    
+}
+
+
+
+
+
+@media screen and (max-width: 991px) {   /*s'applique aux ecrants avec une largeur <768px */
+
+    
+
+
+    .graph-table-container{
+        flex-direction: column-reverse;
+        gap:40px;
+        align-items: center;
+        height:1300px;
+    }
+
+    .table-annee-container{
+        width:95%;
+        height:600px;
+    }
+
+    .graph-filtres-container{
+        width:95%;   /*le graph prend 90% de la largeur de graph-table-container*/
+        height:600px;
+    }
+
+
+
+}
+
+@media screen and (min-width:992px){   /*s'applique aux ecrants avec une largeur >768px */
+   
+    .graph-filtres-container{
+        width:55%;  /*le tableau prend 60% de la largeur*/
+    }
+
+    .table-annee-container{
+        width:35%;
+    }
+
+    
+
+    .graph-table-container{
+        height: 600px;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+

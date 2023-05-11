@@ -1,0 +1,86 @@
+/*les boutton de la section*/
+
+
+
+
+
+
+/*style du boutton année tableau*/
+.annee-container>select{ 
+    height: 40px;
+    width:180px;
+    background-color: #ffffff;
+    border:1px solid #333;
+   
+}
+
+select:focus{
+    outline: none;
+}
+
+
+
+
+
+
+/*style du boutton télécharger hover*/
+.telecharger-container>button:hover{
+    cursor: pointer;
+    background-color: var(--telecharger-bg-hover);
+    transform: translateY(-2px);
+
+}
+
+.telecharger-container img{
+    vertical-align: middle; /*mettre l'image sur la meme ligne du boutton télécharger*/
+}
+
+
+
+a.info{
+    position:relative; /*this is the key*/
+    color:#000;
+
+    text-decoration:none;
+    text-align:center;
+  }
+
+
+
+a.info span{display: none}
+
+.telecharger-container button:hover span{ /*the span will display just on :hover state*/
+    display:block;
+    position:absolute;
+    top:-80px;
+    right: -30px;
+    width:15em;
+    border:none;
+    background:rgb(132, 126, 128);
+    text-align: center;
+    padding:10px;
+    color:#FFF;
+    border-radius: 4px;
+  }
+
+.telecharger-container button:hover span:after{ /*the span will display just on :hover state*/
+    content:'';
+    position:absolute;
+    bottom:-4px;
+    width:10px;
+    height:10px;
+    border:none;
+    background:rgb(132, 126, 128);
+    left:50%;
+    margin-left:-5px;
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+  }
+
+  @media screen and (max-width: 400px) {  
+   .filres-container label{
+    font-size: 10px;
+   } 
+  }
+

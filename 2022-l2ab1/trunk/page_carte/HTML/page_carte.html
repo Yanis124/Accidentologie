@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="../../page_statistique/CSS/body.css" rel="stylesheet" type="text/css">
+
+        
+
+        <link rel="stylesheet" href="../../page_statistique/CSS/select.css">
+        <link rel="stylesheet" href="../../page_statistique/CSS/spine.css">
+        <link rel="stylesheet" href="../CSS/filtres.css">
+
+        
+        <link href="../CSS/style.css" rel="stylesheet" type="text/css"><!-- CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> <!-- checkbox CSS -->
+        <title>Carte des accidents de la route</title>
+
+        <!-- Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:400,700&display=swap" rel="stylesheet"> <!-- header style -->
+
+        <link rel="stylesheet" href="../../Commun/CSS/commun.css" type="text/css">
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+        <link rel="stylesheet" href="../plugin/FullScreen/Control.FullScreen.css"> <!--plugin to add the full screen button-->
+        <script src="../plugin/FullScreen/Control.FullScreen.js"></script>
+    
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css"> <!-- map clusters  -->
+        <script src='https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster-src.js'></script>
+
+        <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
+        <script src="[path to js]/leaflet-geojson-vt.js"></script>
+        <script src="../plugin/leaflet-geojson-vt.js"></script>
+
+        <link rel="icon" href="../../Commun/images/A.svg">
+      
+
+        
+
+        
+  
+
+
+        
+    
+        
+    </head>
+    <body onload="nomRegions(); nomDepartements(); nomVilles() ;openFiltreList(); dateLimit();getAtm();getAge(); getGravite(); initMap();createPin();resetDate()">
+
+        <header id="header_absolute">
+    
+            <div class="container">
+                    
+                    <div>
+
+                        <ul class="pages">
+                            <li><a href="../../page_accueil/HTML/essaie.html"><img src="../../Commun/images/logo.jpg" alt="Logo de Accidentologie"></a></li>
+                            <li><a href="page_carte.html"> Carte</a></li>
+                            <li><a href="../../page_statistique/HTML/statistiques.html">  Statistiques</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+
+        </header>
+
+<!-- SECOND HEADER-->
+         <header id="header_fixed">
+
+            <div class="container">
+
+                <div>
+
+                    <div>
+
+                        <div>
+                            <ul class="pages">
+                                <li><a href="../../page_accueil/HTML/essaie.html"><img src="../../Commun/images/logo.jpg" alt="Logo de Accidentologie"></a></li>
+                                <li><a href="page_carte.html">Carte</a></li>
+                                <li><a href="../../page_statistique/HTML/statistiques.html">Statistiques</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+    
+    
+
+        <main id="main">
+            <section id="section-carte">
+                <div id="mapContainer" class="map-container">
+                    <div id="map">
+                        <!-- Map -->
+                        
+                        
+                        
+                        
+                    </div>
+                    <svg id="spinner-carte"  width="80px" height="80px" viewBox="0 0 66 66" >
+                        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                    
+                    
+                    
+                    
+                </div>
+            
+                <form id="filtres">
+                    <div id="filtre-container" class="filtre-container">
+
+                        <div class="date-container">  <!--filter "date" or "intervalle de date"-->
+                        
+                           
+                            <div class="date-specifique-container" id="switch-container">
+                                <p>Date spécifique</p>
+                                <label class="switch">
+                                    <input type="checkbox" value="specifique-date" onclick="displayDate(this)" id="specifique-date">
+                                    <span class="slider round"></span>
+                                </label>
+
+                            </div>
+                            <div class="intervalle-date-container" id="switch-container">
+                                <p>Intervalle de date</p>
+                                <label class="switch">
+                                    <input type="checkbox" value="date-interval" onclick="displayDateInterval(this)" id="interval-date">
+                                    <span class="slider round"></span>
+                                </label>
+
+                            </div>
+                        </div>
+                        <!--If we choose "date" then display of an element "choix de date spécifique"--> 
+                        <div class="date-container" id="date-specifique-container" style="display: none;">
+                            <input onkeydown="return false" onclick="closeList()"  onchange="getDate()" id="date" type="date"  name="date-specifique">
+                            <span>Date</span>
+                        </div>
+                        <!--If we choose the filter "Intervalle de date" then display of the element "choix de date début" and "choix de date fin"--> 
+                        <div class="date-container" id="date-interval-container" style="display: none;">
+                            <div class="interval-container">
+                                <input onkeydown="return false" onclick="closeList()" onchange="getIntervalleDateStart(); getIntervalleDate()" type="date" id="date-debut" name="date-debut">
+                                <span>Debut</span>
+                            </div>
+                            <div class="interval-container">
+                                <input onkeydown="return false" onclick="closeList()" onchange="getIntervalleDateEnd(); getIntervalleDate()" type="date" id="date-fin" name="date-fin">
+                                <span>Fin</span>
+                            </div>
+                        </div>
+                    
+                        <!--Filter "region" -->  
+                        <div class="region-container" id="region">
+                            <div class="select-btn">
+                                <div class="btn-text"> <span class="region-text" id="text-list"> Region </span> 
+                                    <span id="region-choice"> </span>
+                                </div>
+                                <span class="arrow-dwn">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <ul class="list-items">
+                                
+                            </ul>
+                            
+                            
+                             
+                        </div>
+
+                        <!-- Filter "departement"--> 
+                        <div class="departement-container" id="departement">
+                            <div class="select-btn">
+                                <div class="btn-text"> <span class="departement-text" id="text-list"> Departement </span> 
+                                    <span id="departement-choice"> </span>
+                                </div>
+                                <span class="arrow-dwn">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <ul class="list-items">
+                                
+                            </ul>
+                        </div>
+                        
+                        <!-- Filtre "ville"-->
+                        <div class="ville-container" id="ville">
+                            <div class="select-btn">
+                                <div class="btn-text"> <span class="ville-text" id="text-list"> Ville </span> 
+                                    <span id="ville-choice"> </span>
+                                </div>
+                                <span class="arrow-dwn">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <ul class="list-items">
+                                
+                            </ul>
+                        </div>
+                        
+                        <!-- Filter "condition météorologique" -->  
+                        <div id="weather" class="weather-container">
+                            <div class="select-btn">
+                                <div class="btn-text"> <span class="weather-text" id="text-list"> Condition Météorologique </span>
+                                    <span id="weather-choice"> </span>
+                                </div>
+                                <span  class="arrow-dwn">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <ul class="list-items">
+                                <li class="item" value="normale" id="condition_meteorologique">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Normale</span>
+                                </li>
+                                <li class="item" value="pluie_legere" id="condition_meteorologique">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Pluie Légère</span>
+                                </li>
+                                <li class="item" value="pluie_forte" id="condition_meteorologique">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Pluie Forte</span>
+                                </li>
+                                <li class="item" value="temps_couverts" id="condition_meteorologique">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Temps Couverts</span>
+                                </li>
+                                <li class="item" value="temps_eblouissant" id="condition_meteorologique">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Temps Éblouissant</span>
+                                </li>
+                                <li class="item" value="neige_grêle" id="condition_meteorologique">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Neige/Grêle</span>
+                                </li>
+                                <li class="item" value="brouillard_fumée" id="condition_meteorologique">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Brouillard/Fumée</span>
+                                </li>
+                                <li class="item" value="vent_fort_tempêtes" id="condition_meteorologique">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Vent Fort/Tempête</span>
+                                </li>
+                            </ul>   
+                        </div>
+    
+                        <!-- Filter "tranches d'âge"-->
+                        <div class="age-container">
+                            <div class="select-btn">
+                                <div class="btn-text"> <span class="age-text" id="text-list"> Tranches d'âges </span> 
+                                <span id="age-choice">   </span>
+                                </div>
+                                <span class="arrow-dwn">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                            </div>
+                            <ul class="list-items">
+                                <li class="item" value="0-18">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">0-18 ans</span>
+                                </li>
+                                <li class="item" value="18-30">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">18-30 ans</span>
+                                </li>
+                                <li class="item" value="30-50">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">30-50 ans</span>
+                                </li>
+                                <li class="item" value="50_et_plus">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">65 ans et plus</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Filter "gravité"-->
+                        <div class="gravite-container">
+                            <div class="select-btn">
+                                <div class="btn-text">  <span class="gravite-text" id="text-list"> Gravité de l'accident </span> 
+                                <span id="gravite-choice" > </span>
+                                </div>
+                                <span class="arrow-dwn">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                            </div>
+                            <ul class="list-items">
+                                <li class="item" value="Indemne">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Indemne</span>
+                                </li>
+                                <li class="item" value="Blessé">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Blessé</span>
+                                </li>
+                                <li class="item" value="Tué">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Tué</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Filter "luminosité"--> 
+                        <div class="lum-container">
+
+                            <div class="jour-container" id="switch-container">
+                                <p>Jour</p>
+                                <label class="switch">
+                                    <input type="checkbox" value="jour" onclick="getJour(this)" id="jour">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="nuit-container" id="switch-container">
+                                <p>Nuit</p>
+                                <label class="switch">
+                                    <input type="checkbox" value="nuit" onclick="getNuit(this)" id="nuit">
+                                    <span class="slider round"></span>
+                                </label>
+
+                            </div>
+                              
+                        </div>
+                    </div>
+                    <div onclick="initFiltre()" class="reset-container">
+                    
+                        <input type="reset" value="Remettre à zéro">
+                    </div>
+                </form>
+            </section>  
+
+
+            <footer id="footer">
+
+                <div class="container">
+            
+                    <div>
+            
+                        <div>
+            
+                            <div class="footer-set_up">
+                                <ul class="pages">
+                                    <li><a href="../../page_crédit/HTML/page_credit.html">Crédits</a></li>
+                                    <li><a href="../../page_A_propos_de_nous/HTML/page_a-propos-de-nous.html">À Propos de Nous</a></li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            
+            </footer>
+        </main>
+        <a id="back2Top" title="Back to top"  onclick="topFunction()"> <img src="https://uploads-ssl.webflow.com/620a7ac0833f49433b0bee1f/620c30eb8af8774df7fbe800_BACK%20TO%20TOP.png" alt="nav-img"> </a>
+        
+    </body>
+    <script src="../JavaScript/get-option-filtres.js"></script>
+    <script src="../JavaScript/get-value-filtres.js"></script>
+    <script src="../JavaScript/get-accidents.js"></script>
+    <script src="../JavaScript/load-carte.js"></script>
+    <script src="../JavaScript/filtres-data.js"></script>
+    <script src="../JavaScript/page_carte.js"></script>
+    <script src="../JavaScript/load-filtre.js"></script>
+    <script src="../JavaScript/cluster-popup.js"></script>
+    <script src="../JavaScript/style.js"></script>
+    <script src="../JavaScript/filtre-lieu.js"></script>
+    <script src="../../Commun/JavaScript/scroll.js"></script>
+
+    
+</html>
+
+<script>
+
+
+    
+
+
+      
+      
+      
+      
+      
+      
+      
+      
+</script>
+
+
+
+
+
+
+

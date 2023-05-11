@@ -1,0 +1,140 @@
+/*les elements du footer*/
+footer{
+    display: flex;
+    background-color: var(--footer-bg);
+    justify-content: space-around;
+    padding: 1%;
+    color:white;
+    
+   
+}
+
+footer p{
+    font-size: var(--footer-title-font);
+    font-family: inherit;
+    font-weight: var(--footer-title-weight);
+}
+
+
+
+
+
+
+footer div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    
+}
+
+footer ul a{
+    display: flex;
+    transition: 0.3s all ease;
+    font-size: 15px;
+    font-weight: var(--footer-text-weight);
+    font-family: inherit;
+}
+
+
+
+
+
+.contactez-nous-container ul a{
+    color:var(--section-filtre-bg);
+    
+}
+
+
+
+
+
+
+.nombre-accident{
+    display:flex;
+
+}
+
+footer ul{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+}
+
+.liens-utils-container ul li{
+    color:var(--link-color) 
+}
+
+
+
+#nombre-accident{
+    display: flex;
+    font-size: 25px;
+    
+}
+
+
+footer a:hover{
+    transform: translateY(-2px);
+    font-weight: 600;
+}
+
+
+footer img{
+    margin-left:5px;
+    filter: invert(1);
+    display: none;
+}
+
+@media screen and (min-width:769px){
+    footer div{
+        width:30%;
+        height: 10%;
+    }
+
+    footer ul{
+        padding-right:10%;
+       
+        
+    }
+
+    footer span{
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 768px) {  
+    footer{
+        flex-direction: column;
+        height:30% ;
+    }
+
+    footer div{
+        justify-content: center;
+        align-items: center;
+        width:100%;
+    }
+
+    .contactez-nous-container ul,.liens-utils-container ul{
+        align-items: center;
+        padding-right:5%
+      
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

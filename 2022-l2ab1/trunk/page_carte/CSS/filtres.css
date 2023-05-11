@@ -1,0 +1,427 @@
+
+
+/*reset button*/
+
+.reset-container input,.telecharger-container>button{
+    height: 100%;
+    background-color: #0a6bff;
+    color:white;
+    box-shadow: 0 0 7px var(--shadow-color);
+    height:45px;
+    width:120px;
+    margin-right: 5%;
+    font-weight: var(--filtre-carte-weight);
+    transition: all 0.3s ease-in-out;
+    border-radius: 6px;
+    font-family: inherit;
+    cursor: pointer;
+    border:none;
+}
+
+.reset-container input:hover{
+    
+    background-color: var(--reset-bg-hover);
+    transform: translateY(-2px);
+}
+
+
+
+
+
+
+
+
+/*check list*/
+
+
+
+.select-btn,#date,#date-debut,#date-fin{
+    position: relative;
+    display: inline-block;
+    padding-bottom: 6px;
+    display: flex;
+    height: 40px;
+    align-items: end;
+    justify-content: space-between;
+    border:none;
+    border-bottom: 1px solid #e8e5e5;
+   
+    width:100%; 
+}
+
+#date,#date-debut,#date-fin{
+  justify-content: end;
+}
+
+@keyframes border-filtre {
+    from {width:0%}
+    to {width:100%}
+  }
+
+  @keyframes border-filtre-close {
+    from {width:100%}
+    to {width:0%}
+  }
+
+
+
+.select-btn.open:after {
+	position: absolute;
+	content: '';
+	height: 2px;
+    background: #0a6bff;
+    width: 0;
+    bottom: 0; 
+    animation-name: border-filtre;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: forwards; 
+    -moz-animation-fill-mode: forwards;    
+    -o-animation-fill-mode: forwards;      
+    -ms-animation-fill-mode: forwards;     
+    animation-fill-mode: forwards;         
+
+    
+}
+
+.select-btn:after {
+	position: absolute;
+	content: '';
+	height: 2px;
+    background: #0a6bff;
+    width: 0;
+    bottom: 0; 
+    animation-name: border-filtre-close;
+    animation-duration: 0.5s;
+    
+    -webkit-animation-fill-mode: forwards; 
+    -moz-animation-fill-mode: forwards;    
+    -o-animation-fill-mode: forwards;      
+    -ms-animation-fill-mode: forwards;     
+    animation-fill-mode: forwards;         
+
+    
+}
+
+@keyframes move-span {
+  from {top:12px}
+  to {top:0}
+}
+
+@keyframes move-span-close {
+  from {top:0}
+  to {top:15px}
+}
+
+
+
+.select-btn.open  #text-list{
+  position: absolute;
+  animation-name: move-span;
+  
+  animation-duration: 0.3s;
+  -webkit-animation-fill-mode: forwards; 
+  -moz-animation-fill-mode: forwards;    
+  -o-animation-fill-mode: forwards;      
+  -ms-animation-fill-mode: forwards;     
+  animation-fill-mode: forwards;   
+}
+
+
+
+
+
+
+
+
+#weather-choice,#ville-choice,#age-choice,#gravite-choice,#departement-choice,#region-choice{
+    color:gray;
+    position: absolute;
+    bottom: 0;
+    
+}
+
+
+.select-btn.open .btn-text{
+    color:#000;
+    font-weight: 500;
+}
+
+
+
+
+
+
+
+.select-btn .btn-text,.date-container span{
+    font-size: var(--filtre-carte-size);
+    font-weight: 500;
+    color: #333;
+
+
+}
+.select-btn .arrow-dwn,input[type="date"]::-webkit-calendar-picker-indicator {
+    display: flex;
+    height: 21px;
+    width: 21px;
+    color: #0a6bff;
+    font-size: 14px;
+    
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {  /*changer les dimensions de l'iconne calendrier */
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
+
+.select-btn.open .arrow-dwn{
+    transform: rotate(-180deg);
+}
+
+.list-items{
+    position: relative;
+    margin-top: 5px;
+    border-radius: 4px;
+    padding: 5px;
+    padding-left:0;
+    padding-right:0;
+    overflow: auto;
+    height: 200px;
+    
+    
+    display: none;
+    z-index: 100;
+}
+.select-btn.open ~ .list-items{
+    display: block;
+    
+  
+}
+.list-items .item{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 35px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0 15px;
+    border-radius: 0px ;
+    background-color: #efefef;
+    border-bottom: solid var(--shadow-color) 1px;
+    
+  
+}
+
+.list-items .item:hover{
+    background-color: var(--graph-text-bg-hover);
+    transform: translateY(-2px);
+
+}
+
+
+.list-items li{
+    border-radius: 0;
+    
+}
+
+
+.item .item-text{
+    font-size: 14px;
+    font-weight: 100;
+    color: #000;
+}
+.item .checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1.5px solid #c0c0c0;
+    transition: all 0.3s ease-in-out;
+}
+.checkbox .check-icon{
+    font-size: 11px;
+    transform: scale(0);
+        transition: all 0.3s ease-in-out;
+
+}
+.item.checked .check-icon{
+    transform: scale(1);
+}
+
+.item.checked{
+    background-color: var(--graph-text-bg-hover) ;
+}
+.list-items li{
+    background-color: #fff;
+}
+
+
+
+
+
+/*side bar header*/
+
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: #142E7B; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    
+  }
+.sidebar-container{
+    border-top:1px solid rgba(255,255,255,.1);;
+}
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+
+
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: white;
+    background-color: #0a6bff;
+  }
+
+
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    
+  }
+
+  #sidebarCarte{
+    background-color: #0a6bff;
+  }
+  
+
+
+
+/*radio button ( filtre lum/ date|intervalle de date )*/
+
+.lum-container,.date-container{
+  display: flex;
+  gap:20px;
+  font-size: var(--filtre-carte-size);
+  width:100%
+}
+
+
+
+.jour-container,.nuit-container,.date-specifique-container,.intervalle-date-container{
+  display: flex;
+  gap:5px;
+  
+  align-items: center;
+
+  
+}
+
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+  }
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    width:50px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #eeeeee;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #0a6bff;
+  }
+
+ 
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(22px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
+  }
+
+  /* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+@media screen and (max-width: 480px) {
+  .select-btn .btn-text,.date-container p,.date-container span,.lum-container p{
+    font-size: 12px;
+  }
+  
+}
+
+@media screen and (min-width:480px){
+  .select-btn .btn-text,.date-container p,.date-container span,.lum-container p{
+    font-size: var(--filtre-carte-size);
+  }
+  
+}
+
+
+
+
+
+

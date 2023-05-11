@@ -1,0 +1,60 @@
+/*ajouter une animation lorsque les données se charge sur la page*/
+
+#spinner-table{
+  margin:50%;
+ 
+}
+
+#spinner-graph,#spinner-table,#spinner-carte{
+  z-index:200;
+    
+    animation: rotator 1.4s linear infinite;
+  }
+  
+  @keyframes rotator {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .path {
+    stroke-dasharray: 187;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation:
+      dash 1.4s ease-in-out infinite, 
+      colors 5.6s ease-in-out infinite;
+  }
+  
+  @keyframes colors {
+    0% { stroke: #4285F4; }
+    25% { stroke: #DE3E35; }
+    50% { stroke: #F7C223; }
+    75% { stroke: #1B9A59; }
+    100% { stroke: #4285F4; }
+  }
+  
+  @keyframes dash {
+    0% { stroke-dashoffset: 187; }
+   50% {
+    stroke-dashoffset: 42;
+     transform:rotate(135deg);
+   }
+   100% {
+    stroke-dashoffset: 187;
+    transform:rotate(450deg);
+   }
+  }
+
+#erreurs-graph,#erreurs-table{
+  width:90%;
+  text-align: center;
+  padding:3%;
+  background-color: #fee7f0;
+  border-top:1px solid #610f26;
+  border-bottom:1px solid #610f26;
+}
+
+#erreurs-table{
+  margin-top: 50%;
+}
+

@@ -1,0 +1,238 @@
+
+
+
+.center { /*Mettre au centre les texte des images*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1{
+    font-weight:bold;
+}
+
+/* NAVIGATION PAGE FORMAT */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* DIFFERENT BANNERS */
+
+#banner {
+
+
+
+    width: 100%;
+    height: 100vh;
+    background-size: cover !important; /*L'image doit Ãªtre redimensionne pour remplier l'arriÃ¨re plan sans deformation en conservant son rapport hauteur/largeur d'origine et !important indique que cette propriÃ©tÃ© doit Ãªtre appliquÃ©e en prioritÃ©, mÃªme si elle est surchargÃ©e*/
+    min-height: 200px; /*Si la page se reduit en hauteur le titre et le sous titre suivent A REVOIR */
+    position:relative; /*pour que les images se mettent les une endessous des autres*/
+}
+
+
+
+
+#content_banner { /*texte sur les images*/
+    position:absolute;
+    text-align:center;
+    color: #f5f5f5; /*Changement de la couleur de toute les police sur les photos*/
+    text-transform:uppercase; 
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#content_banner h1 {
+    font-family: 'BigJohn'; /*Changer la police*/
+    font-size: 75px;
+    margin: 0;
+}
+
+#content_banner h2 {
+    font-weight: 100;
+    font-size: 25px;
+    color:#ffffff
+}
+
+/**********************/ /*scrolling img*/
+
+.bannner-img-container{
+    position: relative;
+}
+
+.banner-background{
+    background-image:linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ), url(../images/pexels-mike-b-5351108.jpg);
+}
+
+article img{
+position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: contrast(60%); /*rendre le texte visible sur les images */
+  animation: 1s;
+
+  
+  transition:  0.5s ease-in-out;
+}
+
+
+
+  .slide-in {
+    animation: slide-in 0.5s forwards;
+  }
+  
+  .slide-out {
+    animation: slide-out 0.5s forwards;
+  }
+
+  .slide-out-prev{
+    animation: slide-out-prev 0.5s forwards;
+  }
+  
+  @keyframes slide-in {
+    0%{
+      left:100%;
+      width:0
+    }
+
+    100%{
+      left:0;
+      width:100%;
+    }
+  }
+
+  
+  @keyframes slide-out {
+    0% {
+      width: 100%;
+      left: 0;
+    }
+    100% {
+      width: 0%;
+      left: 100%;
+    }
+  }
+  
+
+  @keyframes slide-out-prev {
+    from {
+        width:100%;
+      right:0;
+    }
+    to {
+        width:0;
+      right:100%;
+    }
+  }
+
+
+
+  
+
+  
+
+button{
+    position: absolute;
+    top:50%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color:white
+}
+
+.right-button{
+    right:10px;
+}
+
+.left-button{
+    left:10px;
+}
+
+button:hover{
+    background-color:rgba(0, 0, 0, 0.4);
+}
+
+/**********************/ /*scrolling img*/
+
+/* FOOTER */
+
+footer {
+    background-color: rgb(233, 233, 233);
+    padding: 40px 0px;/*Taille du foooter*/
+}
+
+.footer-set_up .pages {
+    display: flex; /*Mettre CRÉDIT et A PROPOS DE NOUS à coté*/
+    justify-content: center;
+}
+
+.footer-set_up .pages li {
+    list-style: none; /*Enleve les pints de la liste*/
+    padding: 0px 20px; /*Eloignement de la barre de séparation*/
+    text-transform:uppercase;
+    font-size: 15px;
+    border-right: 1px solid #9ea8ba; /*Barre de séparation entre CRÉDIT et A PROPOS DE NOUS*/
+}
+
+.footer-set_up .pages li:last-child {
+    border-right: 0px; /*enleve le trait après A PROPOS DE NOUS*/
+}
+
+.footer-set_up .pages li a {
+    color: black; /*couleur du texte footer*/
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    #content_banner h1{
+        font-size: 50px;
+    }
+
+    #content_banner h2{
+        font-size: 20px;
+    }
+
+
+}
+
+
+
+
+
+@media screen and ( max-width: 480px){
+    #content_banner h1{
+        font-size: 33px;
+    }
+    #content_banner h2{
+        font-size: 15px;
+    }
+}
+    
+
+
