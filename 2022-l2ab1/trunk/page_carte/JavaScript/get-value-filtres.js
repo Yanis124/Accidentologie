@@ -79,7 +79,7 @@ function getRegion() {
 
     selectedDepartement=selectedVille=null //nullify departements and cities if we select a new region
     
-        if(selectedRegion=="toutes les regions"){
+        if(selectedRegion=="toutes les regions" || selectedRegion==null){
             
             
             

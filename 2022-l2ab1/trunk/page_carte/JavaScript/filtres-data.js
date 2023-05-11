@@ -427,7 +427,7 @@ async function initFiltre(){  //Ã©viter de cliquer plusieurs fois sur remettre Ã
         init=false
     
         removePin()     //supprimer les marqueurs de la carte
-        setViewUser(locationBase,zoom)
+        
         nomDepartements()   //reset dep | ville
         nomVilles()
         await createPin()

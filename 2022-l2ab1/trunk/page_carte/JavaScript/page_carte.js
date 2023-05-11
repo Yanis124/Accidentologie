@@ -1,4 +1,4 @@
-var zoom=10
+var zoom=11
 
 
 
@@ -50,16 +50,16 @@ function initMap(){  //Initialization of the map
         position:"bottomleft"
     }).addTo(map)
 
-    // map.on('zoom', ()=> {
-    //     zoom=map.getZoom()
+    map.on('zoom', ()=> {
+        zoom=map.getZoom()
         
-    // })
+    })
 
     map.on("moveend",async ()=>{    //get only visible markers
         
        
-        let k=getZoomMove()
-        if(k){
+        let loadMarkers=getZoomMove()
+        if(loadMarkers){
             
         
             const visibleMarkers = getVisibleMarkers()
@@ -228,7 +228,7 @@ async function createPin(){
 }
 
 function setViewUser(listCoordonnees){   //center the map to a specific location
-    map.setView(listCoordonnees,8, {  //make the animation smooth 
+    map.setView(listCoordonnees,zoom, {  //make the animation smooth 
         "animate": true,
         "pan": {
           "duration": 1.5,
