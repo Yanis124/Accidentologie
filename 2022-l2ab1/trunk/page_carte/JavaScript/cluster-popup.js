@@ -71,42 +71,50 @@ function style(note){   //Add style to clusters
 
 }  
 
-
 function popUp(acc){  //Create popups
     //informations of the accident
     
-    var idAccident=popUpData(acc.fields.num_acc)
-    var day=popUpData(acc.fields.jour)
-    var month=popUpData(acc.fields.mois)
-    var year=popUpData(acc.fields.an)
-    var time=popUpData(acc.fields.hrmn)
-    var adress=popUpData(acc.fields.adr)
-    var atm=popUpData(acc.fields.atm)
-    var lum=popUpData(acc.fields.lum)
-    var grav=popUpData(acc.fields.grav)
+    let idAccident=popUpData(acc.fields.num_acc)
+    let day=popUpData(acc.fields.jour)
+    let month=popUpData(acc.fields.mois)
+    let year=popUpData(acc.fields.an)
+    let time=popUpData(acc.fields.hrmn)
+    let adress=popUpData(acc.fields.adr)
+    let atm=popUpData(acc.fields.atm)
+    let lum=popUpData(acc.fields.lum)
+    
     
 
 
 
     //popups style
-    var colorText="#1b6698"
-    var fontSize="15px"
-    var fontSizeTitle="17px"
-    var fontWeigth="700"
     
-    var pop=L.popup({content:"<h1 style='font-size:"+fontSizeTitle+";'>"+"numero d'accident: "+idAccident+"</h1>"//accident number
-    +"<p style='font-size:"+fontSize +";color:"+colorText+"'>"+"<span style='font-size:"+fontSize +";font-weight:"+fontWeigth+";'>"+day+"/"+month+"/"+year+", " //date
-    +time+"</span>"+"</p>"
-    +"<ul style='display:flex;flex-direction:column; padding:0;align-items:start;'>"
-    +"<li style='font-size:"+fontSize+";color:"+colorText+";'>"+"Adresse: "+"<span style='font-size:"+fontSize+";font-weight:"+fontWeigth+";'>"+adress+"</span>"+"</li>"
-    +"<li style='font-size:"+fontSize+";color:"+colorText+";'>"+"Condition atmosphérique: "+"<span style='font-size:+"+fontSize+";font-weight:"+fontWeigth+";'>"+atm+"</span>"+"</li>"
-    +"<li style='font-size:"+fontSize+";color:"+colorText+";'>"+"Lumiere: "+"<span style='font-size:"+fontSize+";font-weight:"+fontWeigth+";'>"+lum+"</span>"+"</li>"
-    +"</ul>"
-    }) 
+    
+    
+    
+    const content=createPopup(idAccident,day,month,year,time,adress,atm,lum)
+    const pop = L.popup({content});
 
     
 
     return pop
+}
+
+function createPopup(idAccident,day,month,year,time,adress,atm,lum){
+    
+        const content = `
+          <h1 class="popup-title">numero d'accident: ${idAccident}</h1>
+          <p class="popup-info"><span>${day}/${month}/${year}, ${time}</span></p>
+          <ul class="popup-list">
+            <li>Adresse: <span>${adress}</span></li>
+            <li>Condition atmosphérique: <span>${atm}</span></li>
+            <li>Lumiere: <span>${lum}</span></li>
+          </ul>
+        `;
+      
+        
+        return content;
+      
 }
 
 function popUpData(data){   //if the data is not available in the API
