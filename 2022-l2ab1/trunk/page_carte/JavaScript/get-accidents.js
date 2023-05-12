@@ -23,7 +23,7 @@ async function getAccident(){
 
 
     var data=data1+"\n"+data2+"\n"+data3+"\n"+data4+"\n"+data5+"\n"+data6+"\n"+data7+"\n"+data8+"\n"+data9
-    data1=data2=data3=data4=data5=data6=data7=data8=data9
+    data1=data2=data3=data4=data5=data6=data7=data8=data9=0
 
 
     let lines=data.split("\n")
