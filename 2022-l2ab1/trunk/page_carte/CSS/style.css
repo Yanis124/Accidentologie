@@ -227,6 +227,31 @@ input[type="date"]:in-range::-webkit-datetime-edit-text {color: transparent; }
     }
 }
 
+
+.popup-title {
+    font-size: 17px;
+  }
+  
+  .popup-info {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1b6698;
+  }
+  
+  .popup-list  {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    align-items: start;
+    font-size: 17px;
+    color: #1b6698;
+    
+  }
+
+  .popup-list span{
+    font-weight: 700;
+  }
+
  
 
 
