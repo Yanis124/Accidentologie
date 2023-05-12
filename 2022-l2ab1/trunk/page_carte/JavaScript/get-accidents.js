@@ -19,15 +19,20 @@ async function getAccident(){
     var data7=await res7.text()
     var data8=await res8.text()
     var data9=await res9.text()
+    res1=res2=res3=res4=res5=res6=res7=res8=res9=0
 
 
-    var data=data1+"/n"+data2+"/n"+data3+"/n"+data4+"/n"+data5+"/n"+data7+"/n"+data8+"/n"+data9
+    var data=data1+"\n"+data2+"\n"+data3+"\n"+data4+"\n"+data5+"\n"+data6+"\n"+data7+"\n"+data8+"\n"+data9
+    data1=data2=data3=data4=data5=data6=data7=data8=data9
 
-    const lines=data.split("\n")
+
+    let lines=data.split("\n")
+    data=0
     for(let i=0;i<lines.length;i++){
         
         listAccident.push(createObjectAccident(lines[i]))
     }
+    lines=0
 }   
 
 function createObjectAccident(lineAccient){
