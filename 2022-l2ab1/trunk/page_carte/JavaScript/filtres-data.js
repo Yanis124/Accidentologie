@@ -357,59 +357,95 @@ async  function filterList() {   //selectedValueAtm contient les valeurs selecti
 
 function selectDataFiltre(){
 
-    start=Date.now()
+ 
 
-    if(!selectedLum){
-        listAccidentFiltre= listAccident
+        // let first=true
+        
+         listAccidentFiltre=listAccident
+     
+        // for(let i=0;listAccidentSelectedFiltre.length>i;i++){
+            
+        //     console.log(listAccidentSelectedFiltre[i])
+        //     if(listAccidentSelectedFiltre[i] && first){
+        //         listAccidentFiltre=listAccidentSelectedFiltre[i]
+                
+        //         first=false
+        //     }
+        //     else{
+        //         listAccidentFiltre = listAccidentSelectedFiltre[i].filter((x) =>listAccidentFiltre.includes(x))
+        //     }
+           
+        // }
+        // 
+        
+
+    if(selectedLum){
+        
+        const set=new Set(listAccidentLum)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
     }
-    else{
+    
+    
 
-        listAccidentFiltre = listAccidentLum.filter((x) =>    
-        listAccident.includes(x))
+     if(selectedRegion && selectedRegion!="toutes les regions"){
+        
+        const set=new Set(listAccidentRegions)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
+    }
+    
+     if (selectedValuesAtm && selectedValuesAtm.length>0) {  
+        
+        const set=new Set(listAccidentAtm)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
     }
     
 
-    if(selectedRegion && selectedRegion!="toutes les regions"){
-        listAccidentFiltre= listAccidentFiltre.filter((x) =>listAccidentRegions.includes(x))
+
+     if(selectedDepartement && selectedDepartement!="tous les departements"){
+        
+        const set=new Set(listAccidentDepartement)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
     }
     
-    if (selectedValuesAtm && selectedValuesAtm.length>0) {  
-        listAccidentFiltre= listAccidentFiltre.filter((x) =>listAccidentAtm.includes(x))
+
+     if(selectedVille && selectedVille!="toutes les villes"){
+        
+        const set=new Set(listAccidentVille)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
+    }
+    
+
+
+
+     if(selectedDate){
+        
+        const set=new Set(listAccidentDate)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
+    }
+
+     if(selectedDateStart && selectedDateEnd){
+        
+        const set=new Set(listAccidentIntervallDate)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
+    }
+
+     if(selectedValuesAge && selectedValuesAge.length>0){
+        
+        
+        const set=new Set(listAccidentAge)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
     }
 
 
-    if(selectedDepartement && selectedDepartement!="tous les departements"){
-        listAccidentFiltre= listAccidentFiltre.filter((x) =>listAccidentDepartement.includes(x))
-    }
-
-    if(selectedVille && selectedVille!="toutes les villes"){
-        listAccidentFiltre= listAccidentFiltre.filter((x) =>listAccidentVille.includes(x))
-    }
-
-
-
-    if(selectedDate){
-        listAccidentFiltre= listAccidentFiltre.filter((x) =>listAccidentDate.includes(x))
-    }
-
-    if(selectedDateStart && selectedDateEnd){
-        listAccidentFiltre= listAccidentFiltre.filter((x) =>listAccidentIntervallDate.includes(x))
-    }
-
-    if(selectedValuesAge && selectedValuesAge.length>0){
-        listAccidentFiltre= listAccidentFiltre.filter((x) =>listAccidentAge.includes(x))
-    }
-
-
-	if(selectedValuesGravite && selectedValuesGravite.length>0){
-        listAccidentFiltre= listAccidentFiltre.filter((x) =>listAccidentGravite.includes(x))
+	 if(selectedValuesGravite && selectedValuesGravite.length>0){
+        
+       
+        
+        const set=new Set(listAccidentGravite)
+        listAccidentFiltre= listAccidentFiltre.filter(item=>set.has(item))
 	}
 
-    end =Date.now()
-
-    console.log(`intersection time : ${ end -start} ms `)
-
-    console.log(listAccidentFiltre)
+    
       
 }
 
