@@ -12,7 +12,7 @@ function loadGraph(){
 }
 
 function erreurGraph(){                              //Error message
-    console.log("erreur de fetch")
+    
     canvas.style.display="none"
     erreursGraph.style.display="block"
 }
@@ -36,7 +36,7 @@ async function loadTable(){ //Display an animation for the chart
 }
 
 function erreurTable(){ 
-    console.log("erreur de fetch")
+    
     tableRecords.style.display="none"
     erreursTable.style.display="block"
 }
