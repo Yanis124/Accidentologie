@@ -26,7 +26,7 @@ function initMap(){  //Initialization of the map
         position: 'topright'},
         wheelDebounceTime:0,
         wheelPxPerZoomLevel:50,
-        minZoom:7,
+        minZoom:5,
         preferCanvas:true,
         
     }).setView(locationBase,11);
@@ -52,6 +52,7 @@ function initMap(){  //Initialization of the map
 
     map.on('zoom', ()=> {
         zoom=map.getZoom()
+        drawVisibleMarkers()
         
     })
 
@@ -60,40 +61,49 @@ function initMap(){  //Initialization of the map
        
         let loadMarkers=getZoomMove()
         if(loadMarkers){
-            
+            drawVisibleMarkers()
         
-            const visibleMarkers = getVisibleMarkers()
-
-            
-
-            removePin()
-            markerCluster=new L.markerClusterGroup( { animate: true,animateAddingMarkers: true})
-            await loadCarte()
-            await loadFiltre()
-
-            const record=50000
-            let markersInit=[]
-            for(let i=0;i<visibleMarkers.length;i++){
-                markersInit.push(visibleMarkers[i])
-
-                if(i%record==0 && i>0){  //add only 100000 markers at once 
-                    await addMarkers(markersInit)   
-                    markersInit=[]
-                }
-                
-                else if((visibleMarkers.length-1)==i && (i%record!=0)){ //add the rest of the markers
-
-                    await addMarkers(markersInit)
-                    markersInit=[]                
-                }
-            }
-
-            await workCarte()
-            await workFiltre()
+           
         }
         
               
     }) 
+}
+async function drawVisibleMarkers(){
+    map.scrollWheelZoom.disable();
+
+    
+    const visibleMarkers = getVisibleMarkers()
+
+            
+
+    removePin()
+    markerCluster=new L.markerClusterGroup( { animate: true,animateAddingMarkers: true})
+    await loadCarte()
+    await loadFiltre()
+
+    const record=50000
+    let markersInit=[]
+    for(let i=0;i<visibleMarkers.length;i++){
+        markersInit.push(visibleMarkers[i])
+
+        if(i%record==0 && i>0){  //add only 100000 markers at once 
+            await createPinMarker(markersInit)  
+            markersInit=[]
+        }
+        
+        else if((visibleMarkers.length-1)==i && (i%record!=0)){ //add the rest of the markers
+
+            await createPinMarker(markersInit)
+            markersInit=[]                
+        }
+    }
+    map.scrollWheelZoom.enable();
+
+
+    await workCarte()
+    await workFiltre()
+
 }
 
 var markerCluster=new L.markerClusterGroup( { animate: true,animateAddingMarkers: true})
@@ -154,7 +164,8 @@ async function createPin(){
 
     
 
-    
+    map.scrollWheelZoom.disable();
+
     disableZoomControl()
     disablePanning()
 
@@ -209,6 +220,8 @@ async function createPin(){
     }
     enableZoomControl()
     enablePanning()
+    map.scrollWheelZoom.enable();
+
     
 
     workCarte()
@@ -216,13 +229,20 @@ async function createPin(){
 
     try{
 
-        if(selectedRegion || selectedDepartement || selectedVille){ //center the map to a specific location if a region | dep | ville is selected
-
-            setViewUser(list[0].fields.coordonnees)
+        if((selectedRegion && selectedRegion!="toutes les regions") || (selectedDepartement && selectedDepartement!="tous les departements") || (selectedVille && selectedVille!="toutes les villes")){ //center the map to a specific location if a region | dep | ville is selected
+            for(var i=0;i<list.length;i++){
+                
+                if(list[i].fields.coordonnees){
+                    
+                    setViewUser(list[i].fields.coordonnees)
+                    
+                    break
+                }
+            }
         }
     }
     catch{
-        console.log("couldn't find coordinates")
+        
     }
 
 }
@@ -239,8 +259,13 @@ function setViewUser(listCoordonnees){   //center the map to a specific location
 async function addMarkers(markersInit){
 
     let visibleMarkers=getVisibleMarkers(markersInit)
+    await createPinMarker(visibleMarkers)
     
     
+    
+}
+
+async function createPinMarker(visibleMarkers){
     markerCluster.addLayers(visibleMarkers);
     map.addLayer(markerCluster);
     await loadCarte()
@@ -250,7 +275,7 @@ async function addMarkers(markersInit){
 
 function getBoundMap(){
     const bounds = map.getBounds(); // Get current map bounds
-    let t=map.getCenter()
+    
     
     return bounds
 }
@@ -262,6 +287,7 @@ function getVisibleMarkers(markersList=markers){
         bounds.contains(L.latLng(marker.getLatLng()))
         
       );
+      
     return visibleMarkers
 }
     //disable zoom control
@@ -291,7 +317,7 @@ function disableZoomControl() {
 
     let distance = center.distanceTo(locationCenter);
     
-    console.log("zoom :" +zoom+" distance : "+distance)
+    
     if((zoom>=16 && distance>200 ) || (zoom>=14 && distance>500 ) ||(zoom>=12 && distance>1000)||(zoom>=10 && distance>2000)||(zoom>=8 && distance>5000)|| (zoom>6 && distance>25000)){
         locationCenter=center
         return true
@@ -299,4 +325,3 @@ function disableZoomControl() {
     }
     return false
   }
-
