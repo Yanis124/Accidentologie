@@ -225,22 +225,21 @@ function changeTypeGraph(){
     
     
     if(inputValueX==facets[1]|| inputValueX==facets[2]){
-        configColonneColonne()
+
         let values = [...colonneSelect.options].map(o => o.value)
+            
             for(var i=0;i<values.length;i++){
             
-        
                 if(values[i]=="camembert"){
-                    
-                    
-                    colonneSelect[i].style.display="none" 
+                    colonneSelect[i].style.display="none"
                 }
+
+
             }
             
-        
         if(typeChart=="camembert"){
             typeChart="colonne"
-            colonneSelect.selectedIndex=0
+            
         }
 
     }
