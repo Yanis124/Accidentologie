@@ -71,6 +71,7 @@ function initMap(){  //Initialization of the map
 }
 async function drawVisibleMarkers(){
     map.scrollWheelZoom.disable();
+    disableZoomControl()
 
     
     const visibleMarkers = getVisibleMarkers()
@@ -98,11 +99,13 @@ async function drawVisibleMarkers(){
             markersInit=[]                
         }
     }
-    map.scrollWheelZoom.enable();
+    
 
 
     await workCarte()
     await workFiltre()
+    map.scrollWheelZoom.disable();
+    disableZoomControl()
 
 }
 
