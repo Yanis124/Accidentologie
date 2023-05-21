@@ -231,7 +231,7 @@ function changeTypeGraph(){
             
         
                 if(values[i]=="camembert"){
-                    console.log(i)
+                    
                     
                     colonneSelect[i].style.display="none" 
                 }
@@ -249,7 +249,7 @@ function changeTypeGraph(){
         for(var i=0;i<values.length;i++){
             
             if(values[i]=="camembert"){
-                console.log(values[i])
+                
                 colonneSelect[i].style.display="block" 
             }
         }
