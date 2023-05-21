@@ -30,7 +30,7 @@ async function DrawFiltreLieu(){  //Retrieve all regions
         var listRegion=data.facet_groups[0].facets
     }
     catch{
-         console.log("erreur")
+         
     }
     for(var i=0;i<listRegion.length;i++){
         lieuSelect.innerHTML+="<option>"+listRegion[i].name+"</option>"
@@ -52,7 +52,7 @@ async function DrawFiltreAnnee(){ //Update the secondary filter "année" to disp
             var data=await res.json()
         }
         catch{
-            console.log("erreur")
+            
         }
         listAnneeLieu=data.facet_groups[0].facets
 
@@ -71,7 +71,7 @@ async function DrawFiltreAnnee(){ //Update the secondary filter "année" to disp
             var data=await res.json()
         }
         catch{
-            console.log("erreur")
+            
         }
 
         listAnneeLieu=data.facet_groups[0].facets
