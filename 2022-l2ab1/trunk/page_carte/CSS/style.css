@@ -227,15 +227,17 @@ input[type="date"]:in-range::-webkit-datetime-edit-text {color: transparent; }
     }
 }
 
-
 .popup-title {
     font-size: 17px;
+    word-wrap: break-word;
+    
   }
   
   .popup-info {
     font-size: 15px;
     font-weight: 700;
-    color: #1b6698;
+    color: hsl(204, 70%, 35%);
+    
   }
   
   .popup-list  {
@@ -243,14 +245,47 @@ input[type="date"]:in-range::-webkit-datetime-edit-text {color: transparent; }
     flex-direction: column;
     padding: 0;
     align-items: start;
-    font-size: 17px;
+    font-size: 15px;
     color: #1b6698;
+    
     
   }
 
   .popup-list span{
     font-weight: 700;
   }
+
+
+
+
+  
+
+@media screen and (min-width: 481px) {
+    .leaflet-popup-content-wrapper{
+        width:350px;
+      } 
+      .popup-title {
+        
+        width: 300px;
+      }
+      .popup-list  {
+        width:300px
+      }
+     
+}
+ 
+@media screen and (max-width: 480px) {
+    .leaflet-popup-content-wrapper{
+        width:260px;
+      } 
+      .popup-title {
+        
+        width: 200px;
+      }
+      .popup-list  {
+        width:200px
+      }
+}
 
  
 
