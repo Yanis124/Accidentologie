@@ -147,7 +147,7 @@ function nomRegions() {
         });
         addEventRegion()
       })
-      .catch(console.log("erreur de fetch")) //Manage errors
+      .catch() //Manage errors
 }
 
 function nomDepartements(){
@@ -174,7 +174,7 @@ function nomDepartements(){
             });
             addEventDepartement()
           })
-          .catch(console.log("erreur de fetch")) //Manage errors
+          .catch() //Manage errors
 }
 
 function nomVilles(){
@@ -197,7 +197,7 @@ function nomVilles(){
 			})
             addEventVille()
 	    })
-        .catch(console.log("erreur de fetch")) //Manage errors
+        .catch() //Manage errors
 
         
 }
