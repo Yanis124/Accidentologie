@@ -321,7 +321,7 @@ function disableZoomControl() {
     let distance = center.distanceTo(locationCenter);
     
     
-    if((zoom>=16 && distance>200 ) || (zoom>=14 && distance>500 ) ||(zoom>=12 && distance>1000)||(zoom>=10 && distance>2000)||(zoom>=8 && distance>5000)|| (zoom>6 && distance>25000)){
+    if((zoom>=16 && distance>200 ) || (zoom>=14 && distance>500 ) ||(zoom>=12 && distance>1000)||(zoom>=10 && distance>2000)||(zoom>=8 && distance>5000)|| (zoom>6 && distance>25000)|| (zoom>5 && distance>100000)){
         locationCenter=center
         return true
         
