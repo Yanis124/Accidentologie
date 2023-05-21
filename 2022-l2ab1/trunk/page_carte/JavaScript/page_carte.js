@@ -104,8 +104,8 @@ async function drawVisibleMarkers(){
 
     await workCarte()
     await workFiltre()
-    map.scrollWheelZoom.disable();
-    disableZoomControl()
+    map.scrollWheelZoom.enable();
+    enableZoomControl()
 
 }
 
