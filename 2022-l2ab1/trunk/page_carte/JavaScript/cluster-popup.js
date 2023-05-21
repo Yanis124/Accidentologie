@@ -3,6 +3,9 @@ const noteMedium=document.getElementsByClassName("leaflet-marker-icon marker-clu
 const noteLarge=document.getElementsByClassName("leaflet-marker-icon marker-cluster marker-cluster-large leaflet-zoom-animated leaflet-interactive")
 
 
+
+
+    
 function regrouper(){ //clusters style
   
     if(noteSmall.length>0){  
@@ -24,9 +27,9 @@ function regrouper(){ //clusters style
 
 function style(note){   //Add style to clusters 
     for(var i=0;i<note.length;i++){  //Iterate the chart to style the elements
-            var Div=note[i]
-            var number=note[i].children[0].children[0]
-            var numberDiv=note[i].children[0]
+            let Div=note[i]
+            let number=note[i].children[0].children[0]
+            let numberDiv=note[i].children[0]
             
             number.style.fontSize="17px"
             number.style.color = 'white' 
@@ -69,7 +72,10 @@ function style(note){   //Add style to clusters
         
     }
 
+    
+
 }  
+
 
 function popUp(acc){  //Create popups
     //informations of the accident
@@ -82,6 +88,7 @@ function popUp(acc){  //Create popups
     let adress=popUpData(acc.fields.adr)
     let atm=popUpData(acc.fields.atm)
     let lum=popUpData(acc.fields.lum)
+    let grav=popUpData(acc.fields.grav)
     
     
 
@@ -92,7 +99,7 @@ function popUp(acc){  //Create popups
     
     
     
-    const content=createPopup(idAccident,day,month,year,time,adress,atm,lum)
+    const content=createPopup(idAccident,day,month,year,time,adress,atm,lum,grav)
     const pop = L.popup({content});
 
     
@@ -100,7 +107,7 @@ function popUp(acc){  //Create popups
     return pop
 }
 
-function createPopup(idAccident,day,month,year,time,adress,atm,lum){
+function createPopup(idAccident,day,month,year,time,adress,atm,lum,grav){
     
         const content = `
           <h1 class="popup-title">numero d'accident: ${idAccident}</h1>
@@ -109,6 +116,7 @@ function createPopup(idAccident,day,month,year,time,adress,atm,lum){
             <li>Adresse: <span>${adress}</span></li>
             <li>Condition atmosphérique: <span>${atm}</span></li>
             <li>Lumiere: <span>${lum}</span></li>
+            <li>Gravité: <span>${displayData(grav)}</span></li>
           </ul>
         `;
       
@@ -118,7 +126,7 @@ function createPopup(idAccident,day,month,year,time,adress,atm,lum){
 }
 
 function popUpData(data){   //if the data is not available in the API
-    var message="Indisponible"
+    let message="Indisponible"
     if(data=="undefined"){
         return message
     }
@@ -127,15 +135,15 @@ function popUpData(data){   //if the data is not available in the API
     }
 }
 
-function displaydata(data){
-    var arr = data.split(','); // split the string by comma delimiter
-        var n=arr.length
+function displayData(data){
+    let arr = data.split(','); // split the string by comma delimiter
+        let n=arr.length
         
         if(n>3){
-            var result=""
-            var count=0
+            let result=""
+            let count=0
             while(count<n){
-                var fourth = arr.slice(count,count+3);
+                let fourth = arr.slice(count,count+3);
                 count=count+3
 
                 
@@ -155,5 +163,5 @@ function displaydata(data){
     
 }
 
-setInterval(regrouper, 500)  //we call the function regrouper() every 300ms.
+setInterval(regrouper, 500)  //we call the function regrouper() every 500ms.
 
