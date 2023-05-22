@@ -27,7 +27,7 @@ function initMap(){  //Initialization of the map
         position: 'topright'},
         wheelDebounceTime:0,
         wheelPxPerZoomLevel:50,
-        minZoom:5,
+        minZoom:6,
         preferCanvas:true,
         
     }).setView(locationBase,11);
@@ -85,22 +85,8 @@ async function drawVisibleMarkers(){
     await loadCarte()
     await loadFiltre()
 
-    const record=50000
-    let markersInit=[]
-    for(let i=0;i<visibleMarkers.length;i++){
-        markersInit.push(visibleMarkers[i])
+    await createPinMarker(visibleMarkers)  
 
-        if(i%record==0 && i>0){  //add only 100000 markers at once 
-            await createPinMarker(markersInit)  
-            markersInit=[]
-        }
-        
-        else if((visibleMarkers.length-1)==i && (i%record!=0)){ //add the rest of the markers
-
-            await createPinMarker(markersInit)
-            markersInit=[]                
-        }
-    }
     map.scrollWheelZoom.enable();
     enableZoomControl()
     
