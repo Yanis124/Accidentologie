@@ -2,6 +2,7 @@ var zoom=11
 
 
 
+
 var carIcon = new L.Icon({ //Modify the marker
     iconUrl: '../images/marker.svg',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -72,14 +73,15 @@ function initMap(){  //Initialization of the map
 async function drawVisibleMarkers(){
     map.scrollWheelZoom.disable();
     disableZoomControl()
+    
 
     
     const visibleMarkers = getVisibleMarkers()
-
+    
             
 
-    removePin()
-    markerCluster=new L.markerClusterGroup( { animate: true,animateAddingMarkers: true})
+    //removePin()
+    
     await loadCarte()
     await loadFiltre()
 
@@ -99,13 +101,13 @@ async function drawVisibleMarkers(){
             markersInit=[]                
         }
     }
+    map.scrollWheelZoom.enable();
+    enableZoomControl()
     
 
 
     await workCarte()
     await workFiltre()
-    map.scrollWheelZoom.enable();
-    enableZoomControl()
 
 }
 
@@ -180,14 +182,16 @@ async function createPin(){
             a = list[i].fields.coordonnees[0]
             b = list[i].fields.coordonnees[1]
             
-                marker = L.marker([a, b], { icon: carIcon })
+                
+                    marker = L.marker([a, b], { icon: carIcon })
                 
                 
-                pop = popUp(list[i])
+                    pop   = popUp(list[i])
                 
-                marker.bindPopup(pop)
-                markers.push(marker)
-                markersInit.push(marker)
+                    marker.bindPopup(pop)
+                    markers.push(marker)
+                    markersInit.push(marker)
+                
 
                 
                 
